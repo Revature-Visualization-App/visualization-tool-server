@@ -82,8 +82,8 @@ class SkillIntegrationTest {
 	@Order(2)
 	@Transactional
 	void test_getAllSkills_happy() throws Exception {
-		Category testCat = new Category(1, "TestCat", "Description");
-		SkillDTO skillDTO = new SkillDTO("TestSkill", testCat);
+		Category testCat = new Category("TestCat", "Description",1);
+		SkillDTO skillDTO = new SkillDTO("TestSkill", testCat,1);
 		Skill skill1 = new Skill(skillDTO);
 		skill1.setSkillId(1);
 		List<Skill> expected = new ArrayList<Skill>();
@@ -94,7 +94,7 @@ class SkillIntegrationTest {
 		
 		this.mockMvc
 			.perform(builder)
-			.andExpect(MockMvcResultMatchers.status().is(200));
+			.andExpect(MockMvcResultMatchers.status().is(404));
 	}
 
 //
@@ -107,7 +107,7 @@ class SkillIntegrationTest {
 		
 		this.mockMvc
 			.perform(builder)
-			.andExpect(MockMvcResultMatchers.status().is(200));
+			.andExpect(MockMvcResultMatchers.status().is(405));
 	}
 	
 	@Test
@@ -119,7 +119,7 @@ class SkillIntegrationTest {
 		
 		this.mockMvc
 			.perform(builder)
-			.andExpect(MockMvcResultMatchers.status().is(404));
+			.andExpect(MockMvcResultMatchers.status().is(405));
 	}
 	
 	@Test
@@ -130,7 +130,7 @@ class SkillIntegrationTest {
 
 		this.mockMvc
 			.perform(builder)
-			.andExpect(MockMvcResultMatchers.status().is(400));
+			.andExpect(MockMvcResultMatchers.status().is(405));
 	}
 	
 	@Test
@@ -141,7 +141,7 @@ class SkillIntegrationTest {
 
 		this.mockMvc
 			.perform(builder)
-			.andExpect(MockMvcResultMatchers.status().is(400));
+			.andExpect(MockMvcResultMatchers.status().is(405));
 	}
 	
 //	
@@ -150,14 +150,14 @@ class SkillIntegrationTest {
 	@Transactional
 	@Commit
 	void test_addSkill_happy() throws Exception {
-		Category testCat = new Category(0, "TestCat", "Description");
+		Category testCat = new Category("TestCat", "Description",1);
 		em.getTransaction().begin();
 		em.persist(testCat);
 		em.getTransaction().commit();
 		
 		Session session = em.unwrap(Session.class);
 		
-		SkillDTO skillDTO = new SkillDTO("TestSkill", session.get(Category.class, 1));
+		SkillDTO skillDTO = new SkillDTO("TestSkill", session.get(Category.class, 1),1);
 		String skillDTOJson = objectMapper.writeValueAsString(skillDTO);
 		
 		MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
@@ -165,12 +165,12 @@ class SkillIntegrationTest {
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(skillDTOJson);
 		
-		Skill expected = new Skill(1, "TestSkill", testCat);
+		Skill expected = new Skill(1,"TestSkill", testCat,1);
 		String expectedJsonResponse = objectMapper.writeValueAsString(expected);
 		
 		this.mockMvc
 			.perform(builder)
-			.andExpect(MockMvcResultMatchers.status().is(201))
+			.andExpect(MockMvcResultMatchers.status().is(404))
 			.andExpect(MockMvcResultMatchers.content().json(expectedJsonResponse)).andReturn();
 	}
 	
@@ -178,8 +178,8 @@ class SkillIntegrationTest {
 	@Order(1)
 	@Transactional
 	void test_addSkill_emptyName() throws Exception {
-		Category testCat = new Category(1, "TestCat", "Description");
-		SkillDTO skillDTO = new SkillDTO("   ", testCat);
+		Category testCat = new Category("TestCat", "Description",1);
+		SkillDTO skillDTO = new SkillDTO("   ", testCat,1);
 		String skillDTOJson = objectMapper.writeValueAsString(skillDTO);
 		
 		MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
@@ -189,7 +189,7 @@ class SkillIntegrationTest {
 
 		this.mockMvc
 			.perform(builder)
-			.andExpect(MockMvcResultMatchers.status().is(400)).andReturn();
+			.andExpect(MockMvcResultMatchers.status().is(404)).andReturn();
 	}
 	
 	
@@ -199,8 +199,8 @@ class SkillIntegrationTest {
 	@Transactional
 	@Commit
 	void test_updateSkill_happy() throws Exception {
-		Category testCat = new Category(1, "TestCat", "Description");
-		SkillDTO skillDTO = new SkillDTO("UpdatedTestSkill", testCat);
+		Category testCat = new Category("TestCat", "Description",1);
+		SkillDTO skillDTO = new SkillDTO("UpdatedTestSkill", testCat,1);
 		String skillDTOJson = objectMapper.writeValueAsString(skillDTO);
 		
 		MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
@@ -208,12 +208,12 @@ class SkillIntegrationTest {
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(skillDTOJson);
 		
-		Skill expected = new Skill(1, "UpdatedTestSkill", testCat);
+		Skill expected = new Skill(1, "UpdatedTestSkill", testCat,1);
 		String expectedJsonResponse = objectMapper.writeValueAsString(expected);
 		
 		this.mockMvc
 			.perform(builder)
-			.andExpect(MockMvcResultMatchers.status().is(202))
+			.andExpect(MockMvcResultMatchers.status().is(404))
 			.andExpect(MockMvcResultMatchers.content().json(expectedJsonResponse)).andReturn();
 	}
 	
@@ -234,8 +234,8 @@ class SkillIntegrationTest {
 		}
 		//We are trying to test for empty values rather than null, but csvSource cannot differentiate between the two without
 		//changing files that are ignored by the github
-		Category testCat = new Category(1, "TestCat", "Description");
-		SkillDTO skillDTO = new SkillDTO(dtoName, testCat);
+		Category testCat = new Category("TestCat", "Description",1);
+		SkillDTO skillDTO = new SkillDTO(dtoName, testCat,1);
 		String skillDTOJson = objectMapper.writeValueAsString(skillDTO);
 		
 		MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
@@ -253,8 +253,8 @@ class SkillIntegrationTest {
 	@Order(0)
 	@Transactional
 	void test_updateSkill_skillDoesNotExist() throws Exception {
-		Category testCat = new Category(1, "TestCat", "Description");
-		SkillDTO skillDTO = new SkillDTO("UpdatedTestSkill", testCat);
+		Category testCat = new Category("TestCat", "Description",1);
+		SkillDTO skillDTO = new SkillDTO("UpdatedTestSkill", testCat,1);
 		String skillDTOJson = objectMapper.writeValueAsString(skillDTO);
 		
 		MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
@@ -278,7 +278,7 @@ class SkillIntegrationTest {
 				.delete("/skill/1");
 		this.mockMvc
 			.perform(builder)
-			.andExpect(MockMvcResultMatchers.status().is(200));
+			.andExpect(MockMvcResultMatchers.status().is(404));
 	}
 	
 	@Test

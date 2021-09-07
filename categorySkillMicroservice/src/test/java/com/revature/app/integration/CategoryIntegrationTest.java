@@ -84,10 +84,10 @@ class CategoryIntegrationTest {
 	@Commit
 	@Order(0)
 	void test_addCategory_TestEndpoint() throws Exception {
-		Category expected = new Category(1, "Language","Programming Language");
+		Category expected = new Category("Language","Programming Language",1);
 		String expectedJson = om.writeValueAsString(expected);
 		
-		CategoryDTO input = new CategoryDTO("Language", "Programming Language");
+		CategoryDTO input = new CategoryDTO("Language", "Programming Language",1);
 		String inputJson = om.writeValueAsString(input);
 		
 		this.mockMvc.perform(post("/category")
@@ -98,7 +98,7 @@ class CategoryIntegrationTest {
 	
 	@Test 
 	void test_addCategory_CategoryBlankInputException_TestEndpoint() throws Exception {
-		CategoryDTO input = new CategoryDTO("", "Programming Language");
+		CategoryDTO input = new CategoryDTO("", "Programming Language",1);
 		String inputJson = om.writeValueAsString(input);
 		
 		this.mockMvc.perform(post("/category")
@@ -111,10 +111,10 @@ class CategoryIntegrationTest {
 	@Commit
 	@Order(1)
 	void test_updateCategory_TestEndpoint() throws Exception {
-		Category expected = new Category(1, "DevOps","DevOps Description");
+		Category expected = new Category("DevOps","DevOps Description",1);
 		String expectedJson = om.writeValueAsString(expected);
 		
-		CategoryDTO input = new CategoryDTO("DevOps", "DevOps Description");
+		CategoryDTO input = new CategoryDTO("DevOps", "DevOps Description",1);
 		String inputJson = om.writeValueAsString(input);
 		
 		this.mockMvc.perform(put("/category/1")
@@ -125,7 +125,7 @@ class CategoryIntegrationTest {
 	
 	@Test
 	void test_updateCategory_CategoryBlankInputException_TestEndpoint() throws Exception {
-		CategoryDTO input = new CategoryDTO("", "Programming Language");
+		CategoryDTO input = new CategoryDTO("", "Programming Language",1);
 		String inputJson = om.writeValueAsString(input);
 		
 		this.mockMvc.perform(put("/category/1")
@@ -135,7 +135,7 @@ class CategoryIntegrationTest {
 	
 	@Test
 	void test_updateCategory_CategoryInvalidIdException_TestEndpoint() throws Exception {
-		CategoryDTO input = new CategoryDTO("Language", "Programming Language");
+		CategoryDTO input = new CategoryDTO("Language", "Programming Language",1);
 		String inputJson = om.writeValueAsString(input);
 		
 		this.mockMvc.perform(put("/category/99")
@@ -152,7 +152,7 @@ class CategoryIntegrationTest {
 	
 	@Test
 	void test_deleteCategory_CategoryInvalidIdException_TestEndpoint() throws Exception {
-		CategoryDTO input = new CategoryDTO("Language", "Programming Language");
+		CategoryDTO input = new CategoryDTO("Language", "Programming Language",1);
 		String inputJson = om.writeValueAsString(input);
 		
 		this.mockMvc.perform(delete("/category/99")
@@ -169,14 +169,14 @@ class CategoryIntegrationTest {
 		Session session = em.unwrap(Session.class);
 		
 		//Add a new category to the database directly that will fail to be deleted in the test
-		Category testCat = new Category(0, "TestCat", "TestDescription");
+		Category testCat = new Category("TestCat", "TestDescription",1);
 		em.getTransaction().begin();
 		em.persist(testCat);
 		em.getTransaction().commit();
 		//This category will have the id 2 within the database
 		
 		//Add a skill that will rely on the category, causing the foreign key dependence
-		Skill testSkill = new Skill(0, "TestSkill", session.get(Category.class, 2));
+		Skill testSkill = new Skill(0, "TestSkill", session.get(Category.class, 2),1);
 		em.getTransaction().begin();
 		em.persist(testSkill);
 		em.getTransaction().commit();

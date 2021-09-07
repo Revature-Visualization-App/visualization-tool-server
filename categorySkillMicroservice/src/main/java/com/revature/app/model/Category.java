@@ -54,12 +54,12 @@ public class Category {
 		this.userid = userid;
 	}
 
-//	public Category(int categoryId, String categoryName, String categoryDescription) {
-//		super();
-//		this.categoryId = categoryId;
-//		this.categoryName = categoryName;
-//		this.categoryDescription = categoryDescription;
-//	}
+	public Category(int categoryId, String categoryName, String categoryDescription) {
+		super();
+		this.categoryId = categoryId;
+		this.categoryName = categoryName;
+		this.categoryDescription = categoryDescription;
+	}
 	
 	@PreRemove
 	private void preRemove() {
