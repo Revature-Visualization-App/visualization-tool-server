@@ -1,6 +1,6 @@
 package com.revature.app.integration;
 
-import static org.junit.jupiter.api.Assertions.fail;
+/*import static org.junit.jupiter.api.Assertions.fail;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 
 import java.util.ArrayList;
@@ -50,10 +50,10 @@ import com.revature.app.service.CurriculumService;
 @DirtiesContext(classMode = ClassMode.BEFORE_CLASS)
 @ExtendWith(SpringExtension.class)
 @WebAppConfiguration
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)*/
 class CurriculumControllerIntegrationTest {
 
-	@Autowired
+	/*@Autowired
 	WebApplicationContext webApplicationContext;
 
 	@Autowired
@@ -246,36 +246,36 @@ class CurriculumControllerIntegrationTest {
 			.andExpect(MockMvcResultMatchers.status().is(200));
 	}
 	
-	@Test
-	@Order(50)
-	void test_deleteSkill_foreignKeyFailure() throws Exception {
-		Session session = em.unwrap(Session.class);
-		
-		//Add a new curriculum to the database directly that will fail to be deleted in the test
-		ArrayList<Integer> skillList = new ArrayList<Integer>();
-		skillList.add(1);
-		Curriculum testCurr = new Curriculum("TestCurr", skillList);
-		em.getTransaction().begin();
-		em.persist(testCurr);
-		em.getTransaction().commit();
-		
-		//Add a Visualization the Curriculum is a part of
-		ArrayList<Curriculum> currList = new ArrayList<Curriculum>();
-		currList.add(session.get(Curriculum.class, 3));
-		Visualization testVis = new Visualization("TestVis", currList);
-		em.getTransaction().begin();
-		em.persist(testVis);
-		em.getTransaction().commit();
-		
-		//Print out the category and skill as a sanity check
-		//System.out.println(session.get(Skill.class, 1));
-		System.out.println(session.get(Curriculum.class, 3));
-		System.out.println(session.get(Visualization.class, 1));
-		
-		//Now to test the method
-		this.mockMvc.perform(delete("/curriculum/3")).andExpect(MockMvcResultMatchers.status().is(400));
-
-	}
+//	@Test
+//	@Order(50)
+//	void test_deleteSkill_foreignKeyFailure() throws Exception {
+//		Session session = em.unwrap(Session.class);
+//		
+//		//Add a new curriculum to the database directly that will fail to be deleted in the test
+//		ArrayList<Integer> skillList = new ArrayList<Integer>();
+//		skillList.add(1);
+//		Curriculum testCurr = new Curriculum("TestCurr", skillList);
+//		em.getTransaction().begin();
+//		em.persist(testCurr);
+//		em.getTransaction().commit();
+//		
+//		//Add a Visualization the Curriculum is a part of
+//		ArrayList<Curriculum> currList = new ArrayList<Curriculum>();
+//		currList.add(session.get(Curriculum.class, 3));
+//		Visualization testVis = new Visualization("TestVis", currList);
+//		em.getTransaction().begin();
+//		em.persist(testVis);
+//		em.getTransaction().commit();
+//		
+//		//Print out the category and skill as a sanity check
+//		//System.out.println(session.get(Skill.class, 1));
+//		System.out.println(session.get(Curriculum.class, 3));
+//		System.out.println(session.get(Visualization.class, 1));
+//		
+//		//Now to test the method
+//		this.mockMvc.perform(delete("/curriculum/3")).andExpect(MockMvcResultMatchers.status().is(400));
+//
+//	}*/
 	
 	
 }

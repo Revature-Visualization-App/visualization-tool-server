@@ -1,6 +1,6 @@
 package com.revature.app.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+/*import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.when;
 
@@ -39,10 +39,10 @@ import com.revature.app.model.Primer;
 //import com.revature.app.model.Skill;
 
 @ExtendWith(MockitoExtension.class)
-@MockitoSettings(strictness = Strictness.LENIENT)
+@MockitoSettings(strictness = Strictness.LENIENT)*/
 class PrimerServiceUnitTest {
 
-	@Mock
+	/*@Mock
 	private VisualizationDao vDao;
 	
 	@Mock
@@ -239,5 +239,5 @@ class PrimerServiceUnitTest {
 		} catch (EmptyParameterException e) {
 			assertEquals("The Primer ID was left blank", e.getMessage());
 		}
-	}
+	}*/
 }
