@@ -8,7 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -73,7 +74,9 @@ public class UserController {
 	@PostMapping("/update")
 	public ResponseEntity<User>  updateUserCredentials(@RequestBody LinkedHashMap<String, String> user){
 		
-		User u = uServ.updateUser(  Integer.parseInt(user.get("id")) ,  user.get("newemail"), user.get("newpass"));
+		User u = uServ.updateUser(Integer.parseInt(user.get("id")), user.get("email"), user.get("pass"), user.get("first"), user.get("last"));
+		//User u = new User(  Integer.parseInt(user.get("id")) ,  user.get("email"), user.get("pass"));
+		System.out.println(u);
 		
 		if(u == null) {
 			return new ResponseEntity<User>(u, HttpStatus.FORBIDDEN);

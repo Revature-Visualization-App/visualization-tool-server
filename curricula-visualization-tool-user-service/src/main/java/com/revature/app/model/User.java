@@ -78,4 +78,11 @@ public class User {
 		
 	}
 
+
+	public User(int id, String email, String pass) {
+		this.id = id;
+		this.email = email;
+		this.pass = pass;
+	}
+
 }
