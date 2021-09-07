@@ -1,6 +1,6 @@
 package com.revature.app.dao;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+/*import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,23 +27,23 @@ import com.revature.app.model.Category;
 @DataJpaTest
 @ActiveProfiles("test")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@DirtiesContext(classMode = ClassMode.BEFORE_CLASS)
+@DirtiesContext(classMode = ClassMode.BEFORE_CLASS)*/
 class CategoryDaoUnitTest {
 	
-	@Autowired
+/*	@Autowired
 	private CategoryDAO categoryDAO;
 
 	@BeforeEach
 	void setUp() throws Exception {
 		
 	}
-/*
+
 	@Test
 	@Order(0)
 	@Commit
 	void testCreateCategory_postive() {
-		Category expected = new Category(1, "Language", "Programming language");
-		Category testInput = new Category(1, "Language", "Programming language");
+		Category expected = new Category( "Language", "Programming language",1);
+		Category testInput = new Category("Language", "Programming language",1);
 		
 		Category actual = categoryDAO.save(testInput);
 		
@@ -60,7 +60,7 @@ class CategoryDaoUnitTest {
 	@Test
 	@Order(1)
 	void testGetCategoryById_postive() {
-		Category expected = new Category(1, "Language", "Programming language");
+		Category expected = new Category("Language", "Programming language",1);
 		Category actual = categoryDAO.findById(1);
 		
 		assertEquals(expected, actual);
@@ -79,11 +79,11 @@ class CategoryDaoUnitTest {
 	@Test
 	@Order(3)
 	void testGetAllCategories_positive() {
-		Category anotherCategory = new Category(2, "Dev Ops", "DevOps is a set of practices that combines software development and IT operations.");
+		Category anotherCategory = new Category("Dev Ops", "DevOps is a set of practices that combines software development and IT operations.",1);
 		categoryDAO.save(anotherCategory);
 		
-		Category category1 = new Category(1, "Language", "Programming language");
-		Category category2 = new Category(2, "Dev Ops", "DevOps is a set of practices that combines software development and IT operations.");
+		Category category1 = new Category("Language", "Programming language",1);
+		Category category2 = new Category( "Dev Ops", "DevOps is a set of practices that combines software development and IT operations.",1);
 		List<Category> expected = new ArrayList<>();
 		expected.add(category1);
 		expected.add(category2);

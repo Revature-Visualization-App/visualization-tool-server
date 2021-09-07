@@ -1,7 +1,7 @@
 package com.revature.app.service;
 
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+/*import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
@@ -37,29 +37,29 @@ import com.revature.app.exception.ForeignKeyConstraintException;
 import com.revature.app.model.Category;
 
 @ExtendWith(MockitoExtension.class)
-@MockitoSettings(strictness = Strictness.LENIENT)
+@MockitoSettings(strictness = Strictness.LENIENT)*/
 class CategoryServiceUnitTest {
 	
-	@Mock
+	/*@Mock
 	private CategoryDAO categoryDAO;
 	
 	@InjectMocks
 	private CategoryService categoryService;
 	
-/*
+
 	@Test
 	void testGetAllCategories_positive() {
 		List<Category> expected = new ArrayList<>();
 		when(categoryDAO.findAll()).thenReturn(expected);
-		List<Category> actual = categoryService.getAllCategories();
+		List<Category> actual = categoryService.getAllCategories(0);
 		assertEquals(expected, actual);
 	}
 	
 	@Test
 	@Order(0)
 	void testAddCategory_positive() throws CategoryBlankInputException {
-		Category expected = new Category(1, "Language", "Programming Language");
-		CategoryDTO categoryDTO = new CategoryDTO("Language", "Programming Language");
+		Category expected = new Category("Language", "Programming Language",0);
+		CategoryDTO categoryDTO = new CategoryDTO("Language", "Programming Language",0);
 		
 		lenient().when(categoryDAO.save(any(Category.class))).thenReturn(expected);
 		
@@ -72,15 +72,15 @@ class CategoryServiceUnitTest {
 	@EmptySource
 	void testAddCategory_negative_BlankInputException(String categoryName) {
 			assertThrows(CategoryBlankInputException.class, () -> {
-				categoryService.addCategory(new CategoryDTO(categoryName, "Programming Language"));
+				categoryService.addCategory(new CategoryDTO(categoryName, "Programming Language",0));
 			});
 	}
 	
 	@Test
 	void testUpdateCategory_positive() throws CategoryBlankInputException, CategoryInvalidIdException, BadParameterException, CategoryNotFoundException, EmptyParameterException {
-		Category oldCategory = new Category(1, "Language", "Programming Language");
-		Category expected = new Category(1, "DevOps", "set of practices that combines software development and IT operations.");
-		CategoryDTO categoryDTO = new CategoryDTO("DevOps", "set of practices that combines software development and IT operations.");
+		Category oldCategory = new Category("Language", "Programming Language",0);
+		Category expected = new Category("DevOps", "set of practices that combines software development and IT operations.",0);
+		CategoryDTO categoryDTO = new CategoryDTO("DevOps", "set of practices that combines software development and IT operations.",0);
 		
 		lenient().when(categoryDAO.findById(eq(1))).thenReturn(oldCategory);
 		lenient().when(categoryDAO.save(oldCategory)).thenReturn(expected);
@@ -91,11 +91,11 @@ class CategoryServiceUnitTest {
 	@ParameterizedTest
 	@EmptySource
 	void testUpdateCategory_negative_blankInputException(String categoryName) {
-		CategoryDTO inputCategoryDTO = new CategoryDTO(categoryName, "Programming Language");
+		CategoryDTO inputCategoryDTO = new CategoryDTO(categoryName, "Programming Language",0);
 		
 		
 		assertThrows(EmptyParameterException.class, () -> {
-			lenient().when(categoryDAO.findById(eq(1))).thenReturn(new Category(1, "Language", "Programming Language"));
+			lenient().when(categoryDAO.findById(eq(1))).thenReturn(new Category("Language", "Programming Language",0));
 			categoryService.updateCategory("1", inputCategoryDTO);
 		});	
 	}
@@ -104,7 +104,7 @@ class CategoryServiceUnitTest {
 	@Test
 	void test_updateCategory_emptyID() throws BadParameterException, CategoryNotFoundException {
 		try {
-			CategoryDTO upCat = new CategoryDTO("DevOps", "set of practices that combines software development and IT operations.");
+			CategoryDTO upCat = new CategoryDTO("DevOps", "set of practices that combines software development and IT operations.",0);
 			categoryService.updateCategory("   ", upCat);
 			fail("EmptyParameterException was not thrown");
 		} catch (EmptyParameterException e) {
@@ -115,7 +115,7 @@ class CategoryServiceUnitTest {
 	@Test
 	void test_updateCategory_badID() throws CategoryNotFoundException, EmptyParameterException {
 		try {
-			CategoryDTO upCat = new CategoryDTO("DevOps", "set of practices that combines software development and IT operations.");
+			CategoryDTO upCat = new CategoryDTO("DevOps", "set of practices that combines software development and IT operations.",0);
 			categoryService.updateCategory("test", upCat);
 			fail("BadParameterException was not thrown");
 		} catch (BadParameterException e) {
@@ -127,7 +127,7 @@ class CategoryServiceUnitTest {
 	@MethodSource("invalidIds")
 	void testUpdateCategory_negative_invalidIdException(String id) {
 		
-		CategoryDTO inputCategoryDTO = new CategoryDTO("Language", "Programming Language");
+		CategoryDTO inputCategoryDTO = new CategoryDTO("Language", "Programming Language",0);
 		
 		assertThrows(CategoryNotFoundException.class, () -> {
 			categoryService.updateCategory(id, inputCategoryDTO);

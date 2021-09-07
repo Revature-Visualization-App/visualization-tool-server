@@ -17,6 +17,7 @@ public interface SkillDAO extends JpaRepository<Skill, Integer>{
 	public Skill findById(int skillId);
 	public List<Skill>findAllBycategory(Category category);
 	public List<Skill>findAllByuserid(int id);
+
 	
 	
 }

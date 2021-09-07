@@ -121,5 +121,9 @@ public class SkillService {
 			throw new ForeignKeyConstraintException("Please remove this skill from all curricula before attempting to delete this skill");
 		}
 	}
+
+
+
+
 	
 }
