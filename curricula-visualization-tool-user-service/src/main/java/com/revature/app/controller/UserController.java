@@ -70,7 +70,7 @@ public class UserController {
 		return new ResponseEntity<User>(u, HttpStatus.OK);
 	}
 	
-	@PutMapping("/update")
+	@PostMapping("/update")
 	public ResponseEntity<User>  updateUserCredentials(@RequestBody LinkedHashMap<String, String> user){
 		
 		User u = uServ.updateUser(  Integer.parseInt(user.get("id")) ,  user.get("newemail"), user.get("newpass"));
