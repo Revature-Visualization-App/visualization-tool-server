@@ -1,6 +1,6 @@
 package com.revature.app.dao;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+/*import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -30,17 +30,17 @@ import com.revature.app.model.Skill;
 @DataJpaTest
 @ActiveProfiles("test")
 @DirtiesContext(classMode = ClassMode.BEFORE_CLASS)
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)*/
 class SkillDaoUnitTest {
 
-	@Autowired
+	/*@Autowired
 	SkillDAO skillDAO;
 	
 	@Autowired
 	EntityManagerFactory emf;
 	
 	private EntityManager em;
-	/*
+	
 	@BeforeEach
 	public void setup() {
 		em = emf.createEntityManager();
@@ -54,7 +54,7 @@ class SkillDaoUnitTest {
 	@Commit
 	void test_getAllSkills_happy() {
 		Session session = em.unwrap(Session.class);
-		skillDAO.save(new Skill(0, "Test", session.get(Category.class, 1)));
+		skillDAO.save(new Skill(0, "Test", session.get(Category.class, 1), 1));
 		//Adding in another one to make sure we have two
 		List<Skill> actual = skillDAO.findAll();
 		assertEquals(2, actual.size());
@@ -76,7 +76,7 @@ class SkillDaoUnitTest {
 	@Commit
 	void test_getSkillByID_happy() {
 		Session session = em.unwrap(Session.class);
-		Skill expected = new Skill(1, "Test", session.get(Category.class, 1));
+		Skill expected = new Skill(1, "Test", session.get(Category.class, 1),1);
 		Skill actual = skillDAO.findById(1);
 		assertEquals(expected, actual);
 	}
@@ -88,13 +88,13 @@ class SkillDaoUnitTest {
 	@Order(1)
 	@Commit
 	void test_addSkill_happy() {
-		Category testCat = new Category(0, "Test", "TestDescription");
+		Category testCat = new Category("Test", "TestDescription",1);
 		em.getTransaction().begin();
 		em.persist(testCat);
 		em.getTransaction().commit();
 		Session session = em.unwrap(Session.class);
-		Skill expected = new Skill(1, "Test", session.get(Category.class, 1));
-		Skill actual = skillDAO.save(new Skill(0, "Test", session.get(Category.class, 1)));
+		Skill expected = new Skill(1, "Test", session.get(Category.class, 1),1);
+		Skill actual = skillDAO.save(new Skill(1, "Test", session.get(Category.class, 1),1));
 		assertEquals(expected, actual);
 	}
 	
@@ -105,9 +105,9 @@ class SkillDaoUnitTest {
 	@Commit
 	void test_updateSkill_happy() {
 		Session session = em.unwrap(Session.class);
-		SkillDTO dto = new SkillDTO("NewName", session.get(Category.class, 1));
-		Skill expected = new Skill(1, "NewName", session.get(Category.class, 1));
-		Skill actual = skillDAO.getById(1);
+		SkillDTO dto = new SkillDTO("NewName", session.get(Category.class, 1),1);
+		Skill expected = new Skill(1, "NewName", session.get(Category.class, 1),1);
+		Skill actual = skillDAO.findById(1);
 		actual.updateFromDTO(dto);
 		actual = skillDAO.save(actual);
 		assertEquals(expected, actual);

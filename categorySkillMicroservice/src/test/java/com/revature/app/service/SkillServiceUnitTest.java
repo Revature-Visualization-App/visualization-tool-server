@@ -1,6 +1,6 @@
 package com.revature.app.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+/*import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.lenient;
@@ -27,10 +27,10 @@ import com.revature.app.model.Category;
 import com.revature.app.model.Skill;
 
 
-@ExtendWith(MockitoExtension.class)
+@ExtendWith(MockitoExtension.class)*/
 class SkillServiceUnitTest {
 	
-	@Mock
+	/*@Mock
 	private SkillDAO mockSkillDAO;
 	
 	@InjectMocks
@@ -40,16 +40,16 @@ class SkillServiceUnitTest {
 	public static void setUp() {
 		
 	}
-	/*
+	
 	@BeforeEach
 	public void beforeTest() {
-		Skill skill1 = new Skill(1, "", new Category(1, "", null));
-		Skill skill2 = new Skill(0, "", new Category(1, "", null));
-		Skill skill3 = new Skill(1, "TestSkill", new Category(1, "TestCat", null));
-		SkillDTO skillDTO1 = new SkillDTO("TestSkill", new Category(1, "TestCat", null));
-		SkillDTO skillDTO2 = new SkillDTO("Duplicate", new Category(1, "TestCat", null));
-		SkillDTO skillDTO3 = new SkillDTO("Test", new Category(0, "BadCat", null));
-		SkillDTO skillDTO4 = new SkillDTO("TestSkill", new Category(1, "TestCat", null));
+		Skill skill1 = new Skill(1, "", new Category( "", null,1),1);
+		Skill skill2 = new Skill(0, "", new Category("", null,1),1);
+		Skill skill3 = new Skill(1, "TestSkill", new Category("TestCat", null,1),1);
+		SkillDTO skillDTO1 = new SkillDTO("TestSkill", new Category("TestCat", null,1),1);
+		SkillDTO skillDTO2 = new SkillDTO("Duplicate", new Category("TestCat", null,1),1);
+		SkillDTO skillDTO3 = new SkillDTO("Test", new Category("BadCat", null,1),1);
+		SkillDTO skillDTO4 = new SkillDTO("TestSkill", new Category("TestCat", null,1),1);
 		
 		//Get
 		lenient().when(mockSkillDAO.findById(eq(1))).thenReturn(skill1);
@@ -72,30 +72,46 @@ class SkillServiceUnitTest {
 	}
 	
 	
+//	@Test
+//	void test_getAllSkills_happy() {
+//		Skill skill1 = new Skill(1, "", new Category("", null,1),1);
+//		Skill skill2 = new Skill(2, "", new Category("", null,1),1);
+//		List<Skill> expected = new ArrayList<Skill>();
+//		expected.add(skill1);
+//		expected.add(skill2);
+//		when(mockSkillDAO.findAll()).thenReturn(expected);
+//		List<Skill> actual = skillService.getAllSkills(1);
+//		assertEquals(expected, actual);
+//	}
 	@Test
-	void test_getAllSkills_happy() {
-		Skill skill1 = new Skill(1, "", new Category(1, "", null));
-		Skill skill2 = new Skill(2, "", new Category(1, "", null));
-		List<Skill> expected = new ArrayList<Skill>();
-		expected.add(skill1);
-		expected.add(skill2);
-		when(mockSkillDAO.findAll()).thenReturn(expected);
-		List<Skill> actual = skillService.getAllSkills();
-		assertEquals(expected, actual);
-	}
+    void test_getAllSkills_happy() {
+        SkillDTO  skillDTO = new SkillDTO("react",new Category(0,"",""),2);
+        Skill skill1 = new Skill(skillDTO);
+
+        List<Skill> expected = new ArrayList<Skill>();
+        expected.add(skill1);
+
+        when(mockSkillDAO.findAllByuserid(2)).thenReturn(expected);
+        //this expected will be returned when gett allskills(2) run ; all skill runs the mock findAllByuserid
+        //the mock skillDAO return the expected the  skillService.getAllSkills(2) return the expected which is the actual
+        //so expected and actual is actually ecpected equal expected
+        List<Skill> actual = skillService.getAllSkills(2);
+
+        assertEquals(expected, actual);
+    }
 	
 	@Test
 	void test_getAllSkills_noSkills() {
 		List<Skill> expected = new ArrayList<Skill>();
-		when(mockSkillDAO.findAll()).thenReturn(expected);
-		List<Skill> actual = skillService.getAllSkills();
+		when(mockSkillDAO.findAllByuserid(1)).thenReturn(expected);
+		List<Skill> actual = skillService.getAllSkills(1);
 		assertEquals(expected, actual);
 	}
 
 //
 	@Test
 	void test_getSkillByID_happy() throws BadParameterException, EmptyParameterException, SkillNotFoundException {
-		Skill expected = new Skill(1, "", new Category(1, "", null));
+		Skill expected = new Skill(1, "", new Category("", null,1),1);
 		Skill actual = skillService.getSkillByID("1");
 		assertEquals(expected, actual);
 	}
@@ -145,8 +161,8 @@ class SkillServiceUnitTest {
 //	
 	@Test
 	void test_addSkill_happy() throws EmptyParameterException {
-		SkillDTO skillDTO = new SkillDTO("TestSkill", new Category(1, "TestCat", null));
-		Skill expected = new Skill(1, "TestSkill", new Category(1, "TestCat", null));
+		SkillDTO skillDTO = new SkillDTO("TestSkill", new Category("TestCat", null,1),1);
+		Skill expected = new Skill(1, "TestSkill", new Category("TestCat", null,1),1);
 		Skill actual = skillService.addSkill(skillDTO);
 		assertEquals(expected, actual);
 	}
@@ -154,7 +170,7 @@ class SkillServiceUnitTest {
 	@Test
 	void test_addSkill_emptyName() {
 		try {
-			SkillDTO skillDTO = new SkillDTO("  ", new Category(1, "TestCat", null));
+			SkillDTO skillDTO = new SkillDTO("  ", new Category("TestCat", null,1),1);
 			skillService.addSkill(skillDTO);
 			fail("EmptyParameterException was not thrown");
 		} catch (EmptyParameterException e) {
@@ -165,8 +181,8 @@ class SkillServiceUnitTest {
 //	
 	@Test
 	void test_updateSkill_happy() throws EmptyParameterException,  BadParameterException, SkillNotFoundException {
-		SkillDTO upSkill = new SkillDTO("TestSkill", new Category(1, "TestCat", null));
-		Skill expected = new Skill(1, "TestSkill", new Category(1, "TestCat", null));
+		SkillDTO upSkill = new SkillDTO("TestSkill", new Category("TestCat", null,1),1);
+		Skill expected = new Skill(1, "TestSkill", new Category("TestCat", null,1),1);
 		Skill actual = skillService.updateSkill("3", upSkill);
 		assertEquals(expected, actual);
 	}
@@ -174,7 +190,7 @@ class SkillServiceUnitTest {
 	@Test
 	void test_updateSkill_noSkillToUpdate() throws EmptyParameterException,  BadParameterException, SkillNotFoundException {
 		try {
-			SkillDTO upSkill = new SkillDTO("TestSkill", new Category(1, "TestCat", null));
+			SkillDTO upSkill = new SkillDTO("TestSkill", new Category("TestCat", null,1),1);
 			skillService.updateSkill("5", upSkill);
 		} catch (SkillNotFoundException e) {
 			assertEquals("The skill could not be updated because it couldn't be found", e.getMessage());
@@ -184,7 +200,7 @@ class SkillServiceUnitTest {
 	@Test
 	void test_updateSkill_emptyID() throws  SkillNotFoundException {
 		try {
-			SkillDTO upSkill = new SkillDTO("", new Category(1, "", null));
+			SkillDTO upSkill = new SkillDTO("", new Category("", null,1),1);
 			skillService.updateSkill("   ", upSkill);
 			fail("EmptyParameterException was not thrown");
 		} catch (EmptyParameterException e) {
@@ -197,7 +213,7 @@ class SkillServiceUnitTest {
 	@Test
 	void test_updateSkill_badParameter() throws  EmptyParameterException, SkillNotFoundException {
 		try {
-			SkillDTO upSkill = new SkillDTO("Test", new Category(1, "", null));
+			SkillDTO upSkill = new SkillDTO("Test", new Category("", null,1),1);
 			skillService.updateSkill("test", upSkill);
 			fail("BadParameterException was not thrown");
 		} catch (BadParameterException e) {
@@ -208,7 +224,7 @@ class SkillServiceUnitTest {
 	@Test
 	void test_updateSkill_emptyName() throws  BadParameterException, SkillNotFoundException {
 		try {
-			SkillDTO upSkill = new SkillDTO("", new Category(1, "", null));
+			SkillDTO upSkill = new SkillDTO("", new Category("", null,1),1);
 			skillService.updateSkill("1", upSkill);
 			fail("EmptyParameterException was not thrown");
 		} catch (EmptyParameterException e) {
@@ -219,7 +235,7 @@ class SkillServiceUnitTest {
 //	
 	@Test
 	void test_deleteSkill_happy() throws EmptyParameterException, BadParameterException,  SkillNotFoundException, ForeignKeyConstraintException {
-		Skill expected = new Skill(1, "TestSkill", new Category(1, "TestCat", null));
+		Skill expected = new Skill(1, "TestSkill", new Category("TestCat", null,1),1);
 		Skill actual = skillService.deleteSkill("4");
 		assertEquals(expected, actual);
 	}
