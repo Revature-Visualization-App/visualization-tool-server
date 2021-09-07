@@ -1,7 +1,7 @@
 package com.revature.app.service;
 
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+/*import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
@@ -37,16 +37,16 @@ import com.revature.app.exception.ForeignKeyConstraintException;
 import com.revature.app.model.Category;
 
 @ExtendWith(MockitoExtension.class)
-@MockitoSettings(strictness = Strictness.LENIENT)
+@MockitoSettings(strictness = Strictness.LENIENT)*/
 class CategoryServiceUnitTest {
 	
-	@Mock
+	/*@Mock
 	private CategoryDAO categoryDAO;
 	
 	@InjectMocks
 	private CategoryService categoryService;
 	
-/*
+
 	@Test
 	void testGetAllCategories_positive() {
 		List<Category> expected = new ArrayList<>();

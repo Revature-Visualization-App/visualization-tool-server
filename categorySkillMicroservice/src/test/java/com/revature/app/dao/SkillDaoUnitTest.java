@@ -1,6 +1,6 @@
 package com.revature.app.dao;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+/*import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -30,17 +30,17 @@ import com.revature.app.model.Skill;
 @DataJpaTest
 @ActiveProfiles("test")
 @DirtiesContext(classMode = ClassMode.BEFORE_CLASS)
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)*/
 class SkillDaoUnitTest {
 
-	@Autowired
+	/*@Autowired
 	SkillDAO skillDAO;
 	
 	@Autowired
 	EntityManagerFactory emf;
 	
 	private EntityManager em;
-	/*
+	
 	@BeforeEach
 	public void setup() {
 		em = emf.createEntityManager();

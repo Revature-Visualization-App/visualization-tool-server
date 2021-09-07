@@ -1,6 +1,6 @@
 package com.revature.app.controller;
 
-import static org.mockito.ArgumentMatchers.eq;
+/*import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -33,10 +33,10 @@ import com.revature.app.model.Skill;
 import com.revature.app.service.SkillService;
 
 
-@ExtendWith(MockitoExtension.class)
+@ExtendWith(MockitoExtension.class)*/
 class SkillControllerUnitTest {
 
-	private MockMvc mockMvc;
+	/*private MockMvc mockMvc;
 	
 	private ObjectMapper om;
 	
@@ -46,7 +46,7 @@ class SkillControllerUnitTest {
 	@InjectMocks
 	private SkillController skillController;
 	
-	/*
+	
 	@BeforeEach
 	void setup() throws BadParameterException, EmptyParameterException, SkillNotFoundException, ForeignKeyConstraintException {
 		om = new ObjectMapper();

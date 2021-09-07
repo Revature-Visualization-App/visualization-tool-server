@@ -1,6 +1,6 @@
 package com.revature.app.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+/*import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.lenient;
@@ -27,10 +27,10 @@ import com.revature.app.model.Category;
 import com.revature.app.model.Skill;
 
 
-@ExtendWith(MockitoExtension.class)
+@ExtendWith(MockitoExtension.class)*/
 class SkillServiceUnitTest {
 	
-	@Mock
+	/*@Mock
 	private SkillDAO mockSkillDAO;
 	
 	@InjectMocks
@@ -40,7 +40,7 @@ class SkillServiceUnitTest {
 	public static void setUp() {
 		
 	}
-	/*
+	
 	@BeforeEach
 	public void beforeTest() {
 		Skill skill1 = new Skill(1, "", new Category( "", null,1),1);

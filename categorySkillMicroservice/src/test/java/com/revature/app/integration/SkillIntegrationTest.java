@@ -1,6 +1,6 @@
 package com.revature.app.integration;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+/*import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,10 +48,10 @@ import com.revature.app.service.SkillService;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @DirtiesContext(classMode = ClassMode.BEFORE_CLASS)
 @ActiveProfiles("test")
-@SpringBootTest
+@SpringBootTest*/
 class SkillIntegrationTest {
 
-	@Autowired
+	/*@Autowired
 	WebApplicationContext webApplicationContext;
 	
 	@Autowired
@@ -68,7 +68,7 @@ class SkillIntegrationTest {
 	private ObjectMapper objectMapper;
 	
 	
-	/*
+	
 	@BeforeEach
 	void setup() {
 		//this.skillService = new SkillService();

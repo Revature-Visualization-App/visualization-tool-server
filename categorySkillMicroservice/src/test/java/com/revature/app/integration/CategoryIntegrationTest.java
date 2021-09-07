@@ -1,6 +1,6 @@
 package com.revature.app.integration;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+/*import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -44,11 +44,11 @@ import com.revature.app.service.CategoryService;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @DirtiesContext(classMode = ClassMode.BEFORE_CLASS)
 @ActiveProfiles("test")
-@SpringBootTest
+@SpringBootTest*/
 class CategoryIntegrationTest {
 	
 	
-	private MockMvc mockMvc;
+	/*private MockMvc mockMvc;
 	
 	private ObjectMapper om;
 	
@@ -73,7 +73,7 @@ class CategoryIntegrationTest {
         em = emf.createEntityManager();
        
     }
-	/*
+	
 	@Test 
 	void test_getAllCategories_TestEndpoint() throws Exception {
 		this.mockMvc.perform(get("/category"))

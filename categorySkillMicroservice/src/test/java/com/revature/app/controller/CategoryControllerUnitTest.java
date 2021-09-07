@@ -1,6 +1,6 @@
 package com.revature.app.controller;
 
-import static org.mockito.Mockito.*;
+/*import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -32,10 +32,10 @@ import com.revature.app.exception.ForeignKeyConstraintException;
 import com.revature.app.model.Category;
 import com.revature.app.service.CategoryService;
 
-@ExtendWith(MockitoExtension.class)
+@ExtendWith(MockitoExtension.class)*/
 class CategoryControllerUnitTest {
 
-	private MockMvc mockMvc;
+	/*private MockMvc mockMvc;
 	@Mock
 	private CategoryService categoryService;
 	@InjectMocks
@@ -47,7 +47,7 @@ class CategoryControllerUnitTest {
 	void setUp() {
 		this.mockMvc = MockMvcBuilders.standaloneSetup(categoryController).build();
 	}
-/*
+
 	@Test
 	void testAddCategory_positive() throws Exception {
 		Category expected = new Category( "Language", "Programming Language",1);
