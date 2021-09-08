@@ -71,7 +71,7 @@ public class UserController {
 		return new ResponseEntity<User>(u, HttpStatus.OK);
 	}
 	
-	@PostMapping("/update")
+	@PatchMapping("/update")
 	public ResponseEntity<User>  updateUserCredentials(@RequestBody LinkedHashMap<String, String> user){
 		
 		User u = uServ.updateUser(Integer.parseInt(user.get("id")), user.get("email"), user.get("pass"), user.get("first"), user.get("last"));
