@@ -73,6 +73,17 @@ public class CategoryController {
 	public ResponseEntity<List<Category>> getUserCategories(@PathVariable("id")int id){
 		return new ResponseEntity<List<Category>>(  categoryService.getAllCategories(id), HttpStatus.OK);
 	}	
+	@GetMapping(path="/{id}")
+	public Object getCategoryByID(@PathVariable("id") String categoryID) {
+
+			int  categoryIDInt= Integer.parseInt(categoryID);
+			Category cate = categoryService.findCategory(categoryIDInt);
+			String logString = String.format(goodLog, "to get information about a category in the database with id %s");
+			logString = String.format(logString, categoryID);
+			logger.info(logString);
+			return cate;
+	}
+
 	
 	
 	//@PutMapping(path = "category/{id}")
