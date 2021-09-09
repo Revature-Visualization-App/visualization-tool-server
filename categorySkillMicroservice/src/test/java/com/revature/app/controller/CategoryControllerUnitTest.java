@@ -50,9 +50,9 @@ class CategoryControllerUnitTest {
 
 	@Test
 	void testAddCategory_positive() throws Exception {
-		Category expected = new Category(1, "Language", "Programming Language");
+		Category expected = new Category( "Language", "Programming Language",1);
 		String expectedJson = om.writeValueAsString(expected);
-		CategoryDTO inputCategory = new CategoryDTO("Language", "Programming Language");
+		CategoryDTO inputCategory = new CategoryDTO("Language", "Programming Language",1);
 		String inputJson = om.writeValueAsString(inputCategory);
 		
 		when(categoryService.addCategory(inputCategory)).thenReturn(expected);
@@ -65,7 +65,7 @@ class CategoryControllerUnitTest {
 	void testAddCategory_negative_BlankExceptionWithStatusCode() throws Exception {
 		
 		
-		CategoryDTO inputCategory = new CategoryDTO("", "Programming Language");
+		CategoryDTO inputCategory = new CategoryDTO("", "Programming Language",1);
 		String inputJson = om.writeValueAsString(inputCategory);
 		
 		when(categoryService.addCategory(inputCategory)).thenThrow(CategoryBlankInputException.class);
@@ -77,15 +77,15 @@ class CategoryControllerUnitTest {
 	@Test
 	void testGetAllCategories_positive() throws Exception {
 		List<Category> expected = new ArrayList<>();
-		Category category1 = new Category(1, "Language", "Programming Language");
-		Category category2 = new Category(1, "DevOps", "DevOps Description");
+		Category category1 = new Category( "Language", "Programming Language",1);
+		Category category2 = new Category( "DevOps", "DevOps Description",1);
 		
 		expected.add(category1);
 		expected.add(category2);
 		
 		String expectedJson = om.writeValueAsString(expected);
 		
-		when(categoryService.getAllCategories()).thenReturn(expected);
+		when(categoryService.getAllCategories(1)).thenReturn(expected);
 		
 		this.mockMvc.perform(get("/category")).andExpect(status().isOk()).andExpect(content().json(expectedJson));
 		
@@ -93,9 +93,9 @@ class CategoryControllerUnitTest {
 	
 	@Test
 	void testUpdateCategory_positive() throws Exception {
-		Category expected = new Category(1, "Language", "Programming Language");
+		Category expected = new Category("Language", "Programming Language",1);
 		String expectedJson = om.writeValueAsString(expected);
-		CategoryDTO inputCategory = new CategoryDTO("Language", "Programming Language");
+		CategoryDTO inputCategory = new CategoryDTO("Language", "Programming Language",1);
 		String inputJson = om.writeValueAsString(inputCategory);
 		
 		when(categoryService.updateCategory("1", inputCategory)).thenReturn(expected);
@@ -106,7 +106,7 @@ class CategoryControllerUnitTest {
 	
 	@Test
 	void testUpdateCategory_negative_CategoryBlankInputException_() throws Exception {
-		CategoryDTO inputCategory = new CategoryDTO("", "Programming Language");
+		CategoryDTO inputCategory = new CategoryDTO("", "Programming Language",1);
 		String inputJson = om.writeValueAsString(inputCategory);
 		
 		when(categoryService.updateCategory("1", inputCategory)).thenThrow(EmptyParameterException.class);
@@ -117,7 +117,7 @@ class CategoryControllerUnitTest {
 	
 	@Test
 	void test_updateCategory_badParameter() throws Exception {
-		CategoryDTO inputCategory = new CategoryDTO("Test", "Programming Language");
+		CategoryDTO inputCategory = new CategoryDTO("Test", "Programming Language",1);
 		String inputJson = om.writeValueAsString(inputCategory);
 		
 		when(categoryService.updateCategory("test", inputCategory)).thenThrow(BadParameterException.class);
@@ -130,7 +130,7 @@ class CategoryControllerUnitTest {
 	void testUpdateCategory_negative_CategoryInvalidIdException_() throws Exception {
 		
 		
-		CategoryDTO inputCategory = new CategoryDTO("Language", "Programming Language");
+		CategoryDTO inputCategory = new CategoryDTO("Language", "Programming Language",1);
 		String inputJson = om.writeValueAsString(inputCategory);
 		
 		when(categoryService.updateCategory("3", inputCategory)).thenThrow(CategoryNotFoundException.class);

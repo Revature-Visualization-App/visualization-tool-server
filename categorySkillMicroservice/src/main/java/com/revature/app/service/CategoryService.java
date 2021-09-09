@@ -88,6 +88,7 @@ public class CategoryService {
 			} else {
 				categoryToUpdate.setCategoryName(inputCategory.getCategoryName());
 				categoryToUpdate.setCategoryDescription(inputCategory.getCategoryDescription());
+				categoryToUpdate.setUserid(inputCategory.getUserid());;
 				categoryToUpdate = categoryDAO.save(categoryToUpdate);
 			}
 			return categoryToUpdate;

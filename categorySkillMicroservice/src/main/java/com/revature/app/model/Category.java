@@ -54,18 +54,28 @@ public class Category {
 		this.userid = userid;
 	}
 
-//	public Category(int categoryId, String categoryName, String categoryDescription) {
-//		super();
-//		this.categoryId = categoryId;
-//		this.categoryName = categoryName;
-//		this.categoryDescription = categoryDescription;
-//	}
+	public Category(int categoryId, String categoryName, String categoryDescription) {
+		super();
+		this.categoryId = categoryId;
+		this.categoryName = categoryName;
+		this.categoryDescription = categoryDescription;
+	}
+	
+	
 	
 	@PreRemove
 	private void preRemove() {
 	    for (Skill s : SkillList ) {
 	        s.setCategory(null);
 	    }
+	}
+
+	public Category(int categoryId, String categoryName, String categoryDescription, int userid) {
+		super();
+		this.categoryId = categoryId;
+		this.categoryName = categoryName;
+		this.categoryDescription = categoryDescription;
+		this.userid = userid;
 	}
 	
 }

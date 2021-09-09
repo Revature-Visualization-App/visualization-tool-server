@@ -118,10 +118,12 @@ public class SkillController {
 	@PutMapping(path="/{id}")
 	public Object updateSkill(@PathVariable("id") String skillID, @RequestBody SkillDTO skillDTO) {
 		Skill skill = null;
-	
+		int cateID=0;
 	 ;
-		
-		int cateID =skillDTO.getCategory().getCategoryId();
+//		if(skillDTO.getCategory()!=null) {
+//			cateID =skillDTO.getCategory().getCategoryId();
+//		}
+	 cateID =skillDTO.getCategory().getCategoryId();
 	 
 		//System.out.println(cateID);
 		//System.out.println(catServ.findCategory(cateID));

@@ -98,10 +98,11 @@ public class CategoryController {
 	}
 
 	@DeleteMapping(path = "/{id}")
-	@ResponseStatus(code = HttpStatus.NO_CONTENT)
+	@ResponseStatus(code = HttpStatus.OK)
 	public Object deleteCategory(@PathVariable("id") String id) {
 		try {
 			categoryService.deleteCategory(id);
+			System.out.println(id);
 			String logString = String.format(goodLog, "to delete a category from the database with id %s");
 			logString = String.format(logString, id);
 			logger.info(logString);
