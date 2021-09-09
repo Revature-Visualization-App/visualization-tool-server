@@ -60,12 +60,21 @@ public class Category {
 		this.categoryName = categoryName;
 		this.categoryDescription = categoryDescription;
 	}
+
 	
 	@PreRemove
 	private void preRemove() {
 	    for (Skill s : SkillList ) {
 	        s.setCategory(null);
 	    }
+	}
+
+	public Category(int categoryId, String categoryName, String categoryDescription, int userid) {
+		super();
+		this.categoryId = categoryId;
+		this.categoryName = categoryName;
+		this.categoryDescription = categoryDescription;
+		this.userid = userid;
 	}
 	
 }

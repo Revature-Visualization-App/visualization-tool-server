@@ -41,7 +41,10 @@ class SkillServiceUnitTest {
 		
 	}
 	
+	
+	
 	@BeforeEach
+<<<<<<< HEAD
 	public void beforeTest() {
 		Skill skill1 = new Skill(1, "", new Category( "", null,1),1);
 		Skill skill2 = new Skill(0, "", new Category("", null,1),1);
@@ -50,27 +53,54 @@ class SkillServiceUnitTest {
 		SkillDTO skillDTO2 = new SkillDTO("Duplicate", new Category("TestCat", null,1),1);
 		SkillDTO skillDTO3 = new SkillDTO("Test", new Category("BadCat", null,1),1);
 		SkillDTO skillDTO4 = new SkillDTO("TestSkill", new Category("TestCat", null,1),1);
+=======
+		public void beforeTest() {
+		
+		Skill skill1 =  new Skill(1, "",new Category(1, "TestCat", "testcatDescription", 4) ,4);
+
+		Skill skill2 = new Skill(0, "", new Category(1, "TestCat", "testcatDescription", 4), 4);
+		
+		
+		Skill skill4=  new Skill(1, "TestSkill",new Category(1, "TestCat", "testcatDescription", 4) ,4);
+		SkillDTO skillDTO1 = new SkillDTO("TestSkill", new Category(1, "TestCat","testcatDescription",4),4);
+		
+
+		//SkillDTO skillDTO3 = new SkillDTO("", null,0);
+	
+	//	Skill skill4 = new Skill( "TestSkill", new Category(1, "TestCat", "testcatDescription", 4),4);
+	//SkillDTO skillDTO1 =new SkillDTO("TestSkill", new Category( "TestCat", "testcatDescription",4),4);
+	
+		
+		SkillDTO skillDTO2 = new SkillDTO("Testskill", new Category(1, "TestCat", null,4 ),4);
+
+	
+	
+	//		SkillDTO skillDTO3 = new SkillDTO("Test", new Category(0, "BadCat", null));
+	//SkillDTO skillDTO3 = new SkillDTO("TestSkill", new Category(1, "TestCat", "testcatDescription", 4),4);
+>>>>>>> petiz-hien-branch-gateway-without-docker-consul
 		
 		//Get
 		lenient().when(mockSkillDAO.findById(eq(1))).thenReturn(skill1);
-		lenient().when(mockSkillDAO.findById(eq(0))).thenReturn(null);
+		//lenient().when(mockSkillDAO.findById(eq(0))).thenReturn(null);
 		
 		//Add
-		lenient().when(mockSkillDAO.save(new Skill(skillDTO1))).thenReturn(skill3);
-		lenient().when(mockSkillDAO.save(new Skill(skillDTO2))).thenReturn(null);
-		lenient().when(mockSkillDAO.save(new Skill(skillDTO3))).thenReturn(null);
+		lenient().when(mockSkillDAO.save(new Skill(skillDTO1))).thenReturn(skill4);
+		//lenient().when(mockSkillDAO.save(new Skill(skillDTO2))).thenReturn(null);
+		//lenient().when(mockSkillDAO.save(new Skill(skillDTO3))).thenReturn(null);
 		
 		//Update
-		lenient().when(mockSkillDAO.save(new Skill(skillDTO4))).thenReturn(skill3);
-		lenient().when(mockSkillDAO.findById(eq(2))).thenReturn(skill3);
-		lenient().when(mockSkillDAO.findById(eq(3))).thenReturn(skill2);
-		lenient().when(mockSkillDAO.save(skill3)).thenReturn(skill3);
+		lenient().when(mockSkillDAO.save(new Skill(skillDTO1))).thenReturn(skill4);
+
+	lenient().when(mockSkillDAO.findById(eq(3))).thenReturn(skill2);
+		lenient().when(mockSkillDAO.findById(eq(4))).thenReturn(skill1);
+		lenient().when(mockSkillDAO.save(skill4)).thenReturn(skill4);
 		
 		//Delete
-		lenient().when(mockSkillDAO.findById(4)).thenReturn(skill3).thenReturn(null);
-		lenient().when(mockSkillDAO.findById(5)).thenReturn(skill3);
+		//lenient().when(mockSkillDAO.findById(4)).thenReturn(skill3).thenReturn(null);
+	//	lenient().when(mockSkillDAO.findById(5)).thenReturn(skill3);
 	}
 	
+<<<<<<< HEAD
 	
 //	@Test
 //	void test_getAllSkills_happy() {
@@ -99,10 +129,15 @@ class SkillServiceUnitTest {
 
         assertEquals(expected, actual);
     }
-	
+=======
 	@Test
-	void test_getAllSkills_noSkills() {
+	void test_getAllSkills_happy() {
+		SkillDTO  skillDTO = new SkillDTO("react",new Category(0,"",""),2);
+		Skill skill1 = new Skill(skillDTO);
+>>>>>>> petiz-hien-branch-gateway-without-docker-consul
+	
 		List<Skill> expected = new ArrayList<Skill>();
+<<<<<<< HEAD
 		when(mockSkillDAO.findAllByuserid(1)).thenReturn(expected);
 		List<Skill> actual = skillService.getAllSkills(1);
 		assertEquals(expected, actual);
@@ -177,10 +212,24 @@ class SkillServiceUnitTest {
 			assertEquals("The skill name was left blank", e.getMessage());
 		}
 	}
+=======
+		expected.add(skill1);
+
+		when(mockSkillDAO.findAllByuserid(2)).thenReturn(expected);
+		//this expected will be returned when gett allskills(2) run ; all skill runs the mock findAllByuserid
+		//the mock skillDAO return the expected the  skillService.getAllSkills(2) return the expected which is the actual
+		//so expected and actual is actually ecpected equal expected
+		List<Skill> actual = skillService.getAllSkills(2);
+		
+		assertEquals(expected, actual);
+	}
 	
-//	
+	
+>>>>>>> petiz-hien-branch-gateway-without-docker-consul
+	
 	@Test
 	void test_updateSkill_happy() throws EmptyParameterException,  BadParameterException, SkillNotFoundException {
+<<<<<<< HEAD
 		SkillDTO upSkill = new SkillDTO("TestSkill", new Category("TestCat", null,1),1);
 		Skill expected = new Skill(1, "TestSkill", new Category("TestCat", null,1),1);
 		Skill actual = skillService.updateSkill("3", upSkill);
@@ -271,4 +320,14 @@ class SkillServiceUnitTest {
 	}
 	
 	*/
+=======
+		SkillDTO upSkill = new SkillDTO("TestSkill", new Category( 1,"TestCat", "testcatDescription",4),4);
+		Skill expected = new Skill(1, "TestSkill", new Category( 1,"TestCat", "testcatDescription",4),4);
+
+		Skill actual = skillService.updateSkill("4", upSkill);
+		
+		assertEquals(expected, actual);
+	}
+	
+>>>>>>> petiz-hien-branch-gateway-without-docker-consul
 }

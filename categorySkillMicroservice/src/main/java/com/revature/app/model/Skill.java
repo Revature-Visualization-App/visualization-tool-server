@@ -68,11 +68,15 @@ public class Skill {
 				this.category = null;
 		}
 		
+		this.userid=  skillDTO.getUserid();
 //		if(skillDTO.getCurriculumListl() !=null) {
 //			this.curriculumList = skillDTO.getCurriculumListl();
 //		}
 	}
 
+
+	
+	
 
 	
 }
