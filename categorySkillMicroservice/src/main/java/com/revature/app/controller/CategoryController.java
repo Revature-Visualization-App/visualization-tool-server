@@ -25,6 +25,7 @@ import com.revature.app.exception.CategoryBlankInputException;
 import com.revature.app.exception.CategoryNotFoundException;
 import com.revature.app.exception.EmptyParameterException;
 import com.revature.app.exception.ForeignKeyConstraintException;
+import com.revature.app.exception.SkillNotFoundException;
 import com.revature.app.model.Category;
 import com.revature.app.model.Skill;
 import com.revature.app.service.CategoryService;
@@ -64,6 +65,24 @@ public class CategoryController {
 //		logger.info("User called the endpoint to get all categories from the database");
 //		return categoryService.getAllCategories();
 //	}
+	
+	
+	
+	
+	
+	@GetMapping(path="/{id}")
+	public Object getCategoryByID(@PathVariable("id") String categoryID) {
+	
+			int  categoryIDInt= Integer.parseInt(categoryID);
+			Category cate = categoryService.findCategory(categoryIDInt);
+			String logString = String.format(goodLog, "to get information about a category in the database with id %s");
+			logString = String.format(logString, categoryID);
+			logger.info(logString);
+			return cate;
+		
+
+	}
+	
 	
 	
 	
